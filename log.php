@@ -34,7 +34,6 @@
 														$sql = "SELECT * FROM locations";
 														if ($result = mysqli_query($connec, $sql)) {
 															while($row = mysqli_fetch_array($result)){
-												
 																echo '
 																	<p>'.$row['name'].'</p>
 																';
