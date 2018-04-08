@@ -28,7 +28,6 @@
 							</div>
 							<!--begin::Form-->
 							<form class="m-form m-form--fit">
-								<input type="hidden" id="client-location" value="<?php echo $_SESSION['location'] ?>">
 								<div class="m-portlet__body">
 									<div class="m-form__section m-form__section--first">
 										<div class="m-form__heading">
@@ -41,7 +40,7 @@
 											 Name:
 											</label>
 											<div class="m-input-icon m-input-icon--left">
-												<input id="client-first-name" type="text" class="form-control m-input" placeholder="Enter name">
+												<input id="location-name" type="text" class="form-control m-input" placeholder="Enter name">
 												<span class="m-input-icon__icon m-input-icon__icon--left">
 													<span>
 														<i class="la la-user"></i>
@@ -57,14 +56,14 @@
 												Identify Type
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-12">
-												<select class="form-control m-input" name="option">
-													<option value="">
+												<select id="location-type" class="form-control m-input" name="option">
+													<option value="" disabled>
 														Select
 													</option>
-													<option>
+													<option value="single">
 														Single
 													</option>
-													<option>
+													<option value="multiple">
 														Multiple
 													</option>
 												</select>
@@ -78,14 +77,14 @@
 												Can the Client Register?
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-12">
-												<select class="form-control m-input" name="option">
-													<option value="">
+												<select id="can-register" class="form-control m-input" name="option">
+													<option value="" disabled>
 														Select
 													</option>
-													<option>
+													<option value="yes">
 														Yes
 													</option>
-													<option>
+													<option value="no">
 														No
 													</option>
 												</select>
@@ -95,28 +94,33 @@
 											</div>
 										</div>
 										
-										<div class="form-group m-form__group">
-											<label >
-												Please Enter Record Number:
+										<div class="form-group m-form__group row">
+											<label class="col-form-label col-lg-3 col-sm-12">
+												Will Client have record number?
 											</label>
-											<div class="m-input-icon m-input-icon--left">
-												<input id="client-record-number" type="text" class="form-control m-input" placeholder="Enter Record Number">
-												<span class="m-input-icon__icon m-input-icon__icon--left">
-													<span>
-														<i class="la la-bell"></i>
-													</span>
+											<div class="col-lg-4 col-md-9 col-sm-12">
+												<select id="record-number" class="form-control m-input" name="option">
+													<option value="" disabled>
+														Select
+													</option>
+													<option value="1">
+														Yes
+													</option>
+													<option value="0">
+														No
+													</option>
+												</select>
+												<span class="m-form__help">
+													Please select an option.
 												</span>
 											</div>
-											<span class="m-form__help">
-												Please enter record number
-											</span>
 										</div>
 										<div class="form-group m-form__group">
 											<label >
 												Please Enter a Security PIN:
 											</label>
 											<div class="m-input-icon m-input-icon--left">
-												<input id="client-record-number" type="text" class="form-control m-input" placeholder="Enter PIN">
+												<input id="location-pin" type="text" class="form-control m-input" placeholder="Enter PIN">
 												<span class="m-input-icon__icon m-input-icon__icon--left">
 													<span>
 														<i class="la la-bell"></i>
@@ -137,7 +141,7 @@
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>			
 											<span>Congratulations! New location was successfully created. This page will refresh automatically now.</span>		
 										</div>
-										<button id="m_client_submit" class="btn btn-success">
+										<button id="m_location_submit" class="btn btn-success">
 											Submit
 										</button>
 										<button type="reset" class="btn btn-secondary">
