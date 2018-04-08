@@ -1,3 +1,4 @@
+<?php include 'controllers/main.php' ?>
 <!DOCTYPE html>
 <html lang="en" >
 	<!-- begin::Head -->
