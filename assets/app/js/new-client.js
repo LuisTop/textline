@@ -1,8 +1,8 @@
 //== Class definition
-var SendKey = function() {
+var NewClient = function() {
 
-    var handleNewUser = function() {
-        $('#m_client_submit').click(function(e) {
+    var handleNewClient = function() {
+        $('#new_client_submit').click(function(e) {
             e.preventDefault();
             var btn = $(this);
             var form = $(this).closest('form');
@@ -17,7 +17,7 @@ var SendKey = function() {
                     }
                 }
             });
-            
+
             if (!form.valid()) {
                 return;
             }
@@ -27,20 +27,22 @@ var SendKey = function() {
             var first_name    = document.getElementById('client-first-name').value;
             var last_name     = document.getElementById('client-last-name').value;
             var phone         = document.getElementById('client-phone').value;
-            var location      = document.getElementById('client-location').value;
+            var staff_name    = document.getElementById('staff-name').value;
             var record_number = document.getElementById('client-record-number').value;
-            
+            var client_location = document.getElementById('client-location').value;
+
             var appointmentVal = document.getElementById('m_datetimepicker_3').value;
             var appointment = Math.round(new Date(appointmentVal).getTime()/1000);
 
             post_data = {
-              'action'        : 'submitClient',
+              'action'        : 'submitNewClient',
               'first_name'    : first_name,
               'last_name'     : last_name,
               'phone'         : phone,
-              'location'      : location,
+              'locationId'    : client_location,
               'record_number' : record_number,
-              'appointment'   : appointment
+              'appointment'   : appointment,
+              'staff_name'    : staff_name
             };
 
             form.ajaxSubmit({
@@ -66,12 +68,12 @@ var SendKey = function() {
         //== Init demos
         init: function() {
             // init key
-            handleNewUser();
+            handleNewClient();
         }
     };
 }();
 
 //== Class initialization on page load
 jQuery(document).ready(function() {
-    SendKey.init();
+    NewClient.init();
 });

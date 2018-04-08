@@ -28,7 +28,7 @@
 							</div>
 							<!--begin::Form-->
 							<form class="m-form m-form--fit">
-								<input type="hidden" id="client-location" value="<?php echo $_SESSION['location'] ?>">
+								<input type="hidden" id="client-location" value="<?php echo $_SESSION['locationId'] ?>">
 								<div class="m-portlet__body">
 									<div class="m-form__section m-form__section--first">
 										<div class="m-form__heading">
@@ -52,7 +52,7 @@
 												Please enter the first name
 											</span>
 										</div>
-										
+
 										<div class="form-group m-form__group">
 											<label for="example_input_full_name">
 												Last Name:
@@ -86,7 +86,7 @@
 												Please enter a valid phone number
 											</span>
 										</div>
-										
+
 										<div class="form-group m-form__group">
 											<label >
 												Record Number:
@@ -103,6 +103,38 @@
 												Please the client's record number
 											</span>
 										</div>
+
+										<div class="form-group m-form__group">
+											<label for="example_input_first_name">
+											 Select Staff Member
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-12">
+												<select id="staff-name" class="form-control m-input" name="option">
+													<option value="" disabled>
+														Select
+													</option>
+														<?php
+															$sql = "SELECT * FROM staff";
+															if ($result = mysqli_query($connec, $sql)) {
+																while($row = mysqli_fetch_array($result)){
+																	echo '
+																	<option value="'.$row['id'].'">
+																		'.$row['name'].'
+																	</option>
+																	';
+																}
+															} else {
+																echo "Nope";
+															}
+														?>
+
+												</select>
+												<span class="m-form__help">
+													Please select your StaffMember.
+												</span>
+											</div>
+										</div>
+
 
 									</div>
 									<div class="m-form__seperator m-form__seperator--dashed"></div>
@@ -132,11 +164,11 @@
 								</div>
 								<div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
 									<div class="m-form__actions m-form__actions--solid">
-										<div class="m-alert m-alert--outline alert alert-success alert-dismissible hidden" id="success-user-message" role="alert">			
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>			
-											<span>Congratulations! New user was successfully created. This page will refresh automatically now.</span>		
+										<div class="m-alert m-alert--outline alert alert-success alert-dismissible hidden" id="success-user-message" role="alert">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+											<span>Congratulations! New user was successfully created. This page will refresh automatically now.</span>
 										</div>
-										<button id="m_client_submit" class="btn btn-success">
+										<button id="new_client_submit" class="btn btn-success">
 											Submit
 										</button>
 										<button type="reset" class="btn btn-secondary">
