@@ -13,14 +13,14 @@ if ($action == 'login') {
     //Capture variables
 		$get_email 		= mysqli_escape_string($connec, $_POST['email']);
 		$get_password = mysqli_escape_string($connec, $_POST['password']);
-		
+
 		$sql = "SELECT password FROM users WHERE email = '$get_email'";
 		if($result = mysqli_query($connec, $sql)) {
 			while($rows = mysqli_fetch_assoc($result)) {
 				$password_hash = $rows['password'];
 			}
 		}
-		
+
 		if (password_verify($get_password, $password_hash)) {
 			//Validate information
 			$sql = "SELECT * FROM users WHERE email = '$get_email'";
@@ -32,7 +32,7 @@ if ($action == 'login') {
 	          $_SESSION['first_name'] = $rows['first_name'];
 						$_SESSION['last_name'] 	= $rows['last_name'];
 	          $_SESSION['email'] 			= $rows['email'];
-						$_SESSION['location'] 	= $rows['location'];
+						$_SESSION['locationId'] = $rows['locationId'];
 						echo json_encode(array("success" => 1));
 					} else {
 						echo json_encode(array("success" => 0));
@@ -55,7 +55,7 @@ if ($action == 'login') {
     $get_first_name = mysqli_escape_string($connec, $_POST['first_name']);
 		$get_last_name  = mysqli_escape_string($connec, $_POST['last_name']);
 		$get_email    	= mysqli_escape_string($connec, $_POST['email']);
-		
+
 		$get_password = mysqli_escape_string($connec, $_POST['password']);
   	$password = password_hash($get_password, PASSWORD_BCRYPT);
 

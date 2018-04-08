@@ -31,9 +31,9 @@
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
-				
+
 		<!-- begin::Body -->
-			
+
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 					<!-- BEGIN: Subheader -->
 					<div class="m-subheader ">
@@ -42,7 +42,7 @@
 								<h3 class="m-subheader__title m-subheader__title--separator">
 									Turnos
 								</h3>
-								
+
 							</div>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 													<a href="#" class="m-portlet__nav-link m-portlet__nav-link--icon m-portlet__nav-link--icon-xl m-dropdown__toggle">
 														<i class="la la-ellipsis-h m--font-brand"></i>
 													</a>
-													
+
 												</li>
 											</ul>
 										</div>
@@ -74,94 +74,35 @@
 									<div class="m-portlet__body">
 										<div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
 											<!--Begin::Timeline 2 -->
-											<div class="m-timeline-2">
-												<div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-													<div class="m-timeline-2__item">
-														<span class="m-timeline-2__item-time">
-															8:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-danger"></i>
-														</div>
-														<div class="m-timeline-2__item-text  m-timeline-2__item-text--bold m--padding-top-5">
-															Jose Lobo
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															9:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-success"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold">
-															Cristina Guzman
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															10:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-brand"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold m--padding-top-5">
-															Make Ki
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															11:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-warning"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold m--padding-top-5">
-															Luke Wtver
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															12:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-info"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold  m--padding-top-5">
-															Javi Tirado
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															1:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-brand"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold m--padding-top-5">
-															Luis Ramos
-														</div>
-													</div>
-													<div class="m-timeline-2__item m--margin-top-30">
-														<span class="m-timeline-2__item-time">
-															2:00
-														</span>
-														<div class="m-timeline-2__item-cricle">
-															<i class="fa fa-genderless m--font-danger"></i>
-														</div>
-														<div class="m-timeline-2__item-text m-timeline-2__item-text--bold m--padding-top-5">
-															Joaquin Tirado
-														</div>
-													</div>
-												</div>
-											</div>
+											<?php
+														$sql = "SELECT * FROM clients WHERE locationId = ".$_SESSION['locationId']." AND DATE(appointment) = CURDATE()";
+														if ($result = mysqli_query($connec, $sql)) {
+															while($row = mysqli_fetch_array($result)) {
+																echo '
+																<div class="m-timeline-2__item">
+																	<span class="m-timeline-2__item-time">
+																		'.date("h:i", strtotime($row['appointment'])).'
+																	</span>
+																	<div class="m-timeline-2__item-cricle">
+																		<i class="fa fa-genderless m--font-danger"></i>
+																	</div>
+																	<div class="m-timeline-2__item-text  m-timeline-2__item-text--bold m--padding-top-5">
+																		'.$row['first_name'].' '.$row['last_name'].'
+																	</div>
+																</div>
+																';
+															}
+														} else {
+															echo "Nope";
+														}
+													?>
 											<!--End::Timeline 2 -->
 										</div>
 									</div>
 								</div>
 								<!--End::Portlet-->
 							</div>
-							
+
 							</div>
 						</div>
 					</div>
@@ -171,12 +112,12 @@
 
 		</div>
 		<!-- end:: Page -->
-    		        
+
 	    <!-- begin::Scroll Top -->
 		<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
 			<i class="la la-arrow-up"></i>
 		</div>
-		<!-- end::Scroll Top -->	
+		<!-- end::Scroll Top -->
     	<!--begin::Base Scripts -->
 		<script src="../../assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
 		<script src="../../assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
