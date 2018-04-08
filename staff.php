@@ -27,8 +27,7 @@
 								</div>
 							</div>
 							<!--begin::Form-->
-							<form class="m-form m-form--fit">
-								<input type="hidden" id="client-location" value="<?php echo $_SESSION['location'] ?>">
+							<form class="m-form m-form--fit" id="staff-form">
 								<div class="m-portlet__body">
 									<div class="m-form__section m-form__section--first">
 										<div class="m-form__heading">
@@ -38,26 +37,10 @@
 										</div>
 										<div class="form-group m-form__group">
 											<label for="example_input_first_name">
-											 Location ID
-											</label>
-											<div class="m-input-icon m-input-icon--left">
-												<input id="client-first-name" type="text" class="form-control m-input" placeholder="Enter ID">
-												<span class="m-input-icon__icon m-input-icon__icon--left">
-													<span>
-														<i class="la la-user"></i>
-													</span>
-												</span>
-											</div>
-											<span class="m-form__help">
-												Please enter the Location ID
-											</span>
-										</div>
-										<div class="form-group m-form__group">
-											<label for="example_input_first_name">
 											 Full Name
 											</label>
 											<div class="m-input-icon m-input-icon--left">
-												<input id="client-first-name" type="text" class="form-control m-input" placeholder="Enter full name">
+												<input id="staff-name" type="text" class="form-control m-input" placeholder="Enter full name">
 												<span class="m-input-icon__icon m-input-icon__icon--left">
 													<span>
 														<i class="la la-user"></i>
@@ -68,17 +51,46 @@
 												Please enter the staff member's full name
 											</span>
 										</div>
-										
+										<div class="form-group m-form__group">
+											<label for="example_input_first_name">
+											 Location
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-12">
+												<select id="staff-location" class="form-control m-input" name="option">
+													<option value="" disabled>
+														Select
+													</option>
+														<?php
+															$sql = "SELECT * FROM locations";
+															if ($result = mysqli_query($connec, $sql)) {
+																while($row = mysqli_fetch_array($result)){
+																	echo '
+																	<option value="'.$row['id'].'">
+																		'.$row['name'].'
+																	</option>
+																	';
+																}
+															} else {
+																echo "Nope";
+															}
+														?>
+
+												</select>
+												<span class="m-form__help">
+													Please select your Location.
+												</span>
+											</div>
+										</div>
 									</div>
-									
 								</div>
+
 								<div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
 									<div class="m-form__actions m-form__actions--solid">
-										<div class="m-alert m-alert--outline alert alert-success alert-dismissible hidden" id="success-user-message" role="alert">			
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>			
-											<span>Congratulations! New staff member was successfully created. This page will refresh automatically now.</span>		
+										<div class="m-alert m-alert--outline alert alert-success alert-dismissible hidden" id="success-user-message" role="alert">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+											<span>Congratulations! New staff member was successfully created. This page will refresh automatically now.</span>
 										</div>
-										<button id="m_client_submit" class="btn btn-success">
+										<button id="staff_submit" class="btn btn-success">
 											Submit
 										</button>
 										<button type="reset" class="btn btn-secondary">

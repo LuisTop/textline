@@ -9,4 +9,5 @@
 <script src="assets/app/js/dashboard.js" type="text/javascript"></script>
 <script src="assets/app/js/new-client.js" type="text/javascript"></script>
 <script src="assets/app/js/new-location.js" type="text/javascript"></script>
+<script src="assets/app/js/new-staff.js" type="text/javascript"></script>
 <!--end::Page Snippets -->
